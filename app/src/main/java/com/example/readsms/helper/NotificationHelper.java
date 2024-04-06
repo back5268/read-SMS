@@ -17,14 +17,14 @@ import com.example.readsms.R;
 public class NotificationHelper {
 
     private static final String CHANNEL_ID = "sms_channel";
-    private static final String CHANNEL_NAME = "SMS Channel";
-    private static final String CHANNEL_DESCRIPTION = "Channel for SMS notifications";
+    private static final String CHANNEL_NAME = "Transaction Channel";
+    private static final String CHANNEL_DESCRIPTION = "Channel for Transaction notifications";
 
     @SuppressLint("MissingPermission")
     public static void showNotification(Context context, String title, String message) {
         Intent intent = new Intent(context, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_MUTABLE);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(R.drawable.notification)

@@ -15,9 +15,9 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.example.readsms.adapter.SmsAdapter;
-import com.example.readsms.database.SmsRepo;
-import com.example.readsms.models.SMS;
+import com.example.readsms.adapter.TransactionAdapter;
+import com.example.readsms.database.TransactionRepo;
+import com.example.readsms.models.Transaction;
 
 import java.util.List;
 
@@ -34,14 +34,14 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        SmsRepo smsRepo = new SmsRepo(getApplication());
-        LiveData<List<SMS>> listSms = smsRepo.getAllSms();
+        TransactionRepo transactionRepo = new TransactionRepo(getApplication());
+        LiveData<List<Transaction>> listTransaction = transactionRepo.getAll();
 
-        listSms.observe(this, new Observer<List<SMS>>() {
+        listTransaction.observe(this, new Observer<List<Transaction>>() {
             @Override
-            public void onChanged(List<SMS> smsList) {
-                SmsAdapter smsAdapter = new SmsAdapter(MainActivity.this, smsList);
-                recyclerView.setAdapter(smsAdapter);
+            public void onChanged(List<Transaction> transactionList) {
+                TransactionAdapter transactionAdapter = new TransactionAdapter(MainActivity.this, transactionList);
+                recyclerView.setAdapter(transactionAdapter);
             }
         });
     }
